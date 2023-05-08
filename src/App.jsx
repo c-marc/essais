@@ -20,6 +20,10 @@ const Home = () => {
   };
   return (
     <>
+      <p>Yo</p>
+      <label htmlFor="button">Text Input</label>
+      <input id="button" type="button" onClick={() => console.log("yo")} />
+      <br />
       <label htmlFor="file">File Input</label>
       <input id="file" type="file" onChange={handleFileChange} />
       <br />

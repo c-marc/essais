@@ -1,3 +1,11 @@
+p {
+  display: none;
+}
+
+input[type="button"] {
+  display: none;
+}
+
 input[type="file"] {
   display: none;
 }
