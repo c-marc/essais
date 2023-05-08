@@ -5,6 +5,7 @@ import {
   Route,
   useNavigate,
   Link,
+  useLocation,
 } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 
@@ -34,10 +35,15 @@ const Protected = ({ token }) => {
 
 const Login = ({ handleToken }) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleClick = () => {
     handleToken("blabla");
-    navigate("/");
+    if (location.state?.from) {
+      navigate(location.state.from);
+    } else {
+      navigate("/");
+    }
   };
   return <button onClick={handleClick}>Login</button>;
 };
@@ -55,7 +61,11 @@ function App() {
           <Route
             path="/protected"
             element={
-              token ? <Protected token={token} /> : <Navigate to="/login" />
+              token ? (
+                <Protected token={token} />
+              ) : (
+                <Navigate to="/login" state={{ from: "/protected" }} />
+              )
             }
           />
           <Route path="/login" element={<Login handleToken={handleToken} />} />
